@@ -32,7 +32,11 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => scrollToSection('hero')}>
-            <Sparkles className="w-6 h-6 text-rose-gold" />
+             <img 
+              src="/logo.png" 
+              alt="Velora" 
+              className="h-12 w-auto object-contain hover:scale-105 transition-transform duration-300"
+            />
             <span className="font-playfair text-2xl font-bold text-charcoal">Velora</span>
           </div>
 
@@ -55,6 +59,12 @@ const Navigation = () => {
               className="text-charcoal hover:text-rose-gold transition-colors duration-200"
             >
               Book a Demo
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="text-charcoal hover:text-rose-gold transition-colors duration-200"
+            >
+              Contact
             </button>
             <Button 
               onClick={() => scrollToSection('book-call')}

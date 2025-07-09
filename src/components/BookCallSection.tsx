@@ -73,9 +73,9 @@ const BookCallSection = () => {
             <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 lg:p-10 shadow-2xl animate-fade-in-up animate-delay-400">
               <div className="mb-6">
                 <img 
-                  src="/lovable-uploads/3bbea62c-37fd-436f-87a1-8241b408b2cc.png"
+                  src="/images/54cf5ab3-6aa5-49cf-9162-c8ee6d31ce63.png"
                   alt="Virtual assistant consultation"
-                  className="w-32 h-32 object-cover rounded-2xl mx-auto shadow-lg"
+                  className="w-32 object-cover rounded-2xl mx-auto shadow-lg hover:scale-110 transition-transform duration-300"
                 />
               </div>
               
@@ -94,12 +94,12 @@ const BookCallSection = () => {
                   Book My Free Demo
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
                 </Button>
-                <span className="text-sm text-charcoal/60 font-inter">
+                {/* <span className="text-sm text-charcoal/60 font-inter">
                   ⚡ Usually responds within 30 minutes
-                </span>
+                </span> */}
               </div>
               
-              <div className="flex flex-col space-y-2 text-sm text-charcoal/60 text-center">
+              {/* <div className="flex flex-col space-y-2 text-sm text-charcoal/60 text-center">
                 <div className="flex items-center justify-center space-x-1">
                   <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                   <span>Free consultation</span>
@@ -112,7 +112,7 @@ const BookCallSection = () => {
                   <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                   <span>Custom strategy included</span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

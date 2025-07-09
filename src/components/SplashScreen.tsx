@@ -28,8 +28,12 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   return (
     <div className="fixed inset-0 bg-gradient-to-br from-cream via-blush-pink to-rose-gold z-50 flex items-center justify-center transition-opacity duration-500">
       <div className="text-center animate-scale-in">
-        <div className="relative mb-6">
-          <Sparkles className="w-16 h-16 text-rose-gold mx-auto animate-float" />
+        <div className="mb-6 flex justify-center relative">
+          <img 
+            src="/logo.png" 
+            alt="Velora" 
+            className="h-20 w-auto object-contain hover:scale-105 transition-transform duration-300"
+          />
           <div className="absolute -top-2 -right-2 w-4 h-4 bg-rose-gold rounded-full animate-pulse"></div>
         </div>
         <h1 className="font-playfair text-6xl font-bold text-charcoal mb-4 animate-fade-in-up animate-delay-200">

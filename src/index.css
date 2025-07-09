@@ -139,6 +139,22 @@ All colors MUST be HSL.
   }
 }
 
+
+/* @keyframes blink {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: currentColor;
+  }
+}
+
+@layer utilities {
+  .animate-blink-caret {
+    animation: blink 1s step-end infinite;
+  }
+} */
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }

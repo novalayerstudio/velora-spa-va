@@ -162,7 +162,7 @@ const PlansSection = () => {
         {/* Add-ons Section */}
         <div className="animate-fade-in-up animate-delay-400">
           <h3 className="font-playfair text-3xl font-bold text-charcoal text-center mb-8">
-            ✨ Optional Add-Ons
+            Optional Add-Ons
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
             {addOns.map((addon, index) => (

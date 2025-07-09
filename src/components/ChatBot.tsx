@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -7,53 +6,93 @@ import { Textarea } from '@/components/ui/textarea';
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { id: 1, text: "Hi! I'm here to help with any questions about Velora's VA services. What would you like to know?", isBot: true }
+    {
+      id: 1,
+      text: "👋 Hi! I'm Velora's assistant. I can help you with our services and get your message to our team. What's your name?",
+      isBot: true
+    }
   ]);
   const [inputValue, setInputValue] = useState('');
+  const [typing, setTyping] = useState(false);
+  const [step, setStep] = useState<'name' | 'email' | 'question' | 'done'>('name');
+  const [userData, setUserData] = useState({ name: '', email: '', question: '' });
+  const messageEndRef = useRef<HTMLDivElement>(null);
 
   const botResponses = {
-    pricing: "Our plans start at $550/month for part-time VAs and $1,000/month for full-time. Each plan includes different levels of service - would you like me to explain the differences?",
-    plans: "We have 3 main plans: Starter Setter ($550-$1000), Engagement Pro ($700-$1300), and Elite Spa VA ($800-$1500). Each builds on the previous with more advanced features!",
-    demo: "Great! You can book a free demo by clicking the 'Book My Free Demo' button. We'll match you with the perfect VA within 48 hours!",
-    vas: "Our VAs are specially trained for med spas and beauty clinics. They handle DM outreach, appointment scheduling, social media engagement, and lead follow-up.",
-    setup: "Setup is super quick! Once you book a demo, we'll match you with a VA within 48 hours and they can start working immediately.",
-    support: "You'll have dedicated support throughout your journey. Your VA will provide weekly reports and we're always here if you need adjustments!",
-    default: "That's a great question! I'd recommend booking a free demo where our team can give you personalized answers. Would you like me to help you with that?"
+    pricing: "Our plans start at $550/month for part-time VAs and $1,000/month for full-time. Would you like help choosing the right one?",
+    plans: "We offer 3 plans: Starter Setter, Engagement Pro, and Elite Spa VA. Each adds more features for growing med spas!",
+    demo: "You can book a free demo by clicking the 'Book My Free Demo' button. We’ll match you with a VA in 48 hours!",
+    vas: "Our VAs are trained for med spas. They handle DM outreach, scheduling, engagement, and more!",
+    setup: "Setup is fast! Book a demo, get matched within 48 hours, and your VA can start immediately.",
+    support: "You’ll have dedicated support and weekly reports from your VA. We're always available if you need help!",
+    default: "That's a great question! I recommend booking a free demo for personalized advice. Want the link?"
   };
 
   const getResponse = (message: string) => {
-    const lowerMessage = message.toLowerCase();
-    
-    if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('how much')) {
-      return botResponses.pricing;
-    } else if (lowerMessage.includes('plan') || lowerMessage.includes('package')) {
-      return botResponses.plans;
-    } else if (lowerMessage.includes('demo') || lowerMessage.includes('call') || lowerMessage.includes('book')) {
-      return botResponses.demo;
-    } else if (lowerMessage.includes('va') || lowerMessage.includes('assistant') || lowerMessage.includes('what do')) {
-      return botResponses.vas;
-    } else if (lowerMessage.includes('setup') || lowerMessage.includes('start') || lowerMessage.includes('begin')) {
-      return botResponses.setup;
-    } else if (lowerMessage.includes('support') || lowerMessage.includes('help') || lowerMessage.includes('service')) {
-      return botResponses.support;
-    } else {
-      return botResponses.default;
-    }
+    const lower = message.toLowerCase();
+    if (lower.includes('price') || lower.includes('cost') || lower.includes('how much')) return botResponses.pricing;
+    if (lower.includes('plan') || lower.includes('package')) return botResponses.plans;
+    if (lower.includes('demo') || lower.includes('book') || lower.includes('call')) return botResponses.demo;
+    if (lower.includes('va') || lower.includes('assistant') || lower.includes('what do')) return botResponses.vas;
+    if (lower.includes('setup') || lower.includes('start') || lower.includes('begin')) return botResponses.setup;
+    if (lower.includes('support') || lower.includes('help') || lower.includes('service')) return botResponses.support;
+    return botResponses.default;
   };
 
-  const handleSend = () => {
+  const submitToFormspree = async () => {
+    await fetch('https://formspree.io/f/xvgrydqv', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: userData.name,
+        email: userData.email,
+        project: userData.question,
+        _replyto: userData.email,
+        _subject: `New Project Inquiry from ${userData.question}`
+      })
+    });
+  };
+
+  const scrollToBottom = () => {
+    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, typing]);
+
+  const handleSend = async () => {
     if (!inputValue.trim()) return;
 
     const userMessage = { id: Date.now(), text: inputValue, isBot: false };
     setMessages(prev => [...prev, userMessage]);
-
-    // Simulate bot response delay
-    setTimeout(() => {
-      const botResponse = { id: Date.now() + 1, text: getResponse(inputValue), isBot: true };
-      setMessages(prev => [...prev, botResponse]);
-    }, 1000);
-
     setInputValue('');
+    setTyping(true);
+
+    setTimeout(async () => {
+      let botReply = '';
+
+      if (step === 'name') {
+        setUserData(prev => ({ ...prev, name: inputValue }));
+        botReply = `Nice to meet you, ${inputValue}! What’s your email address?`;
+        setStep('email');
+      } else if (step === 'email') {
+        setUserData(prev => ({ ...prev, email: inputValue }));
+        botReply = "Thanks! And what's your main question or message for us?";
+        setStep('question');
+      } else if (step === 'question') {
+        setUserData(prev => ({ ...prev, question: inputValue }));
+        botReply = `Awesome, ${userData.name || 'friend'}! We’ll reach out to you at ${userData.email} soon. 😊`;
+        setStep('done');
+        await submitToFormspree();
+      } else {
+        botReply = getResponse(inputValue);
+      }
+
+      const botMessage = { id: Date.now() + 1, text: botReply, isBot: true };
+      setTyping(false);
+      setMessages(prev => [...prev, botMessage]);
+    }, 1000);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -75,7 +114,7 @@ const ChatBot = () => {
       )}
 
       {isOpen && (
-        <div className="bg-white rounded-2xl shadow-2xl w-80 h-96 flex flex-col animate-scale-in">
+        <div className="bg-white rounded-2xl shadow-2xl w-80 h-96 flex flex-col animate-scale-in border border-gray-200">
           {/* Header */}
           <div className="bg-rose-gold text-white p-4 rounded-t-2xl flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -93,7 +132,7 @@ const ChatBot = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3">
+          <div className="flex-1 p-4 overflow-y-auto space-y-3 scrollbar-thin">
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -110,16 +149,24 @@ const ChatBot = () => {
                 </div>
               </div>
             ))}
+            {typing && (
+              <div className="flex justify-start">
+                <div className="bg-gray-100 text-charcoal px-3 py-2 rounded-2xl text-sm animate-pulse">
+                  Typing...
+                </div>
+              </div>
+            )}
+            <div ref={messageEndRef} />
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t">
+          <div className="p-4 border-t border-gray-200">
             <div className="flex space-x-2">
               <Textarea
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask me anything..."
+                placeholder="Type your message..."
                 className="flex-1 min-h-[40px] resize-none"
                 rows={1}
               />
