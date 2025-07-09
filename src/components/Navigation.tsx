@@ -33,7 +33,7 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => scrollToSection('hero')}>
              <img 
-              src="/logo.png" 
+              src="/velora-spa-va/logo.png" 
               alt="Velora" 
               className="h-12 w-auto object-contain hover:scale-105 transition-transform duration-300"
             />

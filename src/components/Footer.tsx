@@ -49,7 +49,11 @@ const Footer = () => {
             {/* Brand */}
             <div className="md:col-span-2">
               <div className="flex items-center space-x-2 mb-6">
-                <Sparkles className="w-8 h-8 text-rose-400" />
+                  <img 
+                    src="/velora-spa-va/logo.png" 
+                    alt="Velora" 
+                    className="h-12 w-auto object-contain hover:scale-105 transition-transform duration-300"
+                  />
                 <span className="text-3xl font-bold">Velora</span>
               </div>
               <p className="text-gray-300 mb-6 max-w-md">

@@ -30,7 +30,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
       <div className="text-center animate-scale-in">
         <div className="mb-6 flex justify-center relative">
           <img 
-            src="/logo.png" 
+            src="/velora-spa-va/logo.png" 
             alt="Velora" 
             className="h-20 w-auto object-contain hover:scale-105 transition-transform duration-300"
           />
