@@ -99,7 +99,7 @@ const HeroSection = () => {
           <div className="relative animate-fade-in-up animate-delay-300">
             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
               <img
-                src="/images/93a05526-3f82-4c3f-8f28-4f89ed241dc4.png"
+                src="/velora-spa-va/images/93a05526-3f82-4c3f-8f28-4f89ed241dc4.png"
                 alt="Professional virtual assistant working on laptop"
                 className="w-full h-[600px] object-cover"
               />

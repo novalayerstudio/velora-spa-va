@@ -15,19 +15,19 @@ const HowItWorksSection = () => {
       icon: MessageSquare,
       title: "DM Local Leads",
       description: "Reach out to women in your city who already want Botox, facials, and more",
-      image: "/images/1c2f5425-2685-4b52-af4f-1c5efea01933.png"
+      image: "/velora-spa-va/images/1c2f5425-2685-4b52-af4f-1c5efea01933.png"
     },
     {
       icon: Calendar,
       title: "Book Appointments",
       description: "Handle scheduling and follow-up with no-shows and past clients",
-      image: "/images/bc1627cc-1ce4-4ac2-8a83-d2c6f50d91ee.png"
+      image: "/velora-spa-va/images/bc1627cc-1ce4-4ac2-8a83-d2c6f50d91ee.png"
     },
     {
       icon: Heart,
       title: "Keep Your Social Active",
       description: "Post before/afters, reply to comments, and manage reviews",
-      image: "/images/3bbea62c-37fd-436f-87a1-8241b408b2cc.png"
+      image: "/velora-spa-va/images/3bbea62c-37fd-436f-87a1-8241b408b2cc.png"
     }
   ];
 

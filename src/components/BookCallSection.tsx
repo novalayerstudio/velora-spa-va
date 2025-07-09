@@ -73,7 +73,7 @@ const BookCallSection = () => {
             <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 lg:p-10 shadow-2xl animate-fade-in-up animate-delay-400">
               <div className="mb-6">
                 <img 
-                  src="/images/54cf5ab3-6aa5-49cf-9162-c8ee6d31ce63.png"
+                  src="/velora-spa-va/images/54cf5ab3-6aa5-49cf-9162-c8ee6d31ce63.png"
                   alt="Virtual assistant consultation"
                   className="w-32 object-cover rounded-2xl mx-auto shadow-lg hover:scale-110 transition-transform duration-300"
                 />
