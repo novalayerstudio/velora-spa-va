@@ -108,7 +108,7 @@ const PlansSection = () => {
             <span className="text-rose-gold font-inter font-medium">Choose Your Plan</span>
           </div>
           <h2 className="font-playfair text-4xl lg:text-5xl font-bold text-charcoal mb-6">
-            Choose Your VA Plan
+            Pick the plan that fits your vibe
           </h2>
           <p className="text-xl text-charcoal/70 font-inter max-w-3xl mx-auto">
             All plans include dedicated VAs, training, and ongoing support. Switch between full-time and part-time as needed.
