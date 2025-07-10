@@ -4,19 +4,19 @@ import { useState, useRef, useEffect } from 'react';
 const faqData = [
   {
     question: 'Can my VA DM in my style?',
-    answer: 'Yes—your VA will reflect your voice and handle DMs, emails, and scheduling.',
+    answer: 'Yes - your VA will mirror your tone and follow your brand voice. Whether it’s confirming appointments or answering questions, we make sure your clients feel like they’re talking to you.',
   },
   {
     question: 'I don’t have a system—can I still work with you?',
-    answer: 'Absolutely. We’ll help set everything up during onboarding.',
+    answer: 'Absolutely. Many of our clients start from scratch. During onboarding, we’ll help you set up a clear structure so your VA knows exactly how to support you.',
   },
   {
     question: 'Can I switch plans anytime?',
-    answer: 'Yep—pause, upgrade, or downgrade whenever.',
+    answer: 'Yes, you can adjust your plan at any time. Whether you need to pause, upgrade, or scale back, we’ll make it easy.',
   },
   {
-    question: 'Are refunds available?',
-    answer: 'We don’t offer refunds, but we do ensure this works for you—and most clients stay long-term.',
+    question: 'How will my VA know what to do day-to-day?',
+    answer: 'We walk through your needs together during onboarding. You’ll get a clear plan, dedicated support, and full transparency around how your VA will help from day one.',
   },
 ];
 

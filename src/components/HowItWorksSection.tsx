@@ -25,7 +25,7 @@ const HowItWorksSection = () => {
     },
     {
       icon: Heart,
-      title: "You stay in your lane",
+      title: "Focus on what you love",
       description: "Clients booked. You do your thing.",
       image: "/velora-spa-va/images/4dsea62c-87fd-436f-87a1-8241b408b2ca.png"
     }

@@ -153,6 +153,10 @@ All colors MUST be HSL.
   border-radius: 10px;
 }
 
+body{
+  background-color: hsl(var(--cream));
+}
+
 /* @keyframes blink {
   0%, 100% {
     border-color: transparent;

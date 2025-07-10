@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import { handleBookCall } from './BookCallSection';
 
 const HeroSection = () => {
-
-  
   const fullText =
     'We’ll keep your spa booked - without you lifting a finger.';
   const highlightPhrase = 'without you lifting a finger.';
@@ -13,6 +11,7 @@ const HeroSection = () => {
   const highlightEnd = highlightStart + highlightPhrase.length;
 
   const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
     let i = 0;
@@ -22,8 +21,9 @@ const HeroSection = () => {
         i++;
       } else {
         clearInterval(typingInterval);
+        setIsTyping(false); // Hide caret when typing is done
       }
-    }, 35); // typing speed
+    }, 35);
 
     return () => clearInterval(typingInterval);
   }, []);
@@ -58,11 +58,18 @@ const HeroSection = () => {
               </span>
             </div>
 
-            {/* Typing Headline with Highlight */}
+            {/* Typing Headline with Highlight and conditional caret */}
             <h1 className="font-playfair text-5xl lg:text-6xl font-bold text-charcoal leading-tight animate-fade-in-up animate-delay-200">
-              <span className="border-r-2 border-charcoal/70 pr-1 animate-blink-caret">
+              <span
+                className={
+                  isTyping
+                    ? 'border-r-2 border-charcoal/70 pr-1 animate-blink-caret'
+                    : ''
+                }
+              >
                 {displayText.split('').map((char, index) => {
-                  const isHighlight = index >= highlightStart && index < highlightEnd;
+                  const isHighlight =
+                    index >= highlightStart && index < highlightEnd;
                   return (
                     <span
                       key={index}
@@ -76,8 +83,9 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-xl text-charcoal/70 font-inter leading-relaxed animate-fade-in-up animate-delay-300">
-              Your own trained VA takes care of DMs, follows up with leads, and schedules appointments — All
-              so you can focus on your clients, not the admin.
+              Your own trained VA takes care of DMs, follows up with leads, and
+              schedules appointments — All so you can focus on your clients, not
+              the admin.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up animate-delay-400">
@@ -88,6 +96,7 @@ const HeroSection = () => {
                 Book a Free Demo
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
               </Button>
+              {/* Uncomment this if you want a secondary button */}
               {/* <Button
                 variant="outline"
                 onClick={() => scrollToSection('how-it-works')}
@@ -109,24 +118,12 @@ const HeroSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-rose-gold/20 to-transparent"></div>
             </div>
 
-
             {/* Floating stats cards */}
-            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-coffee-brown/30 backdrop-blur-md rounded-full border border-white/40 shadow-xl animate-float">
-              {/* <div className="text-center">
-                <div className="text-2xl font-bold text-rose-gold">200+</div>
-                <div className="text-sm text-charcoal/70">Happy Clients</div>
-              </div> */}
-            </div>
-
+            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-coffee-brown/30 backdrop-blur-md rounded-full border border-white/40 shadow-xl animate-float"></div>
             <div
               className="absolute -top-6 -right-6 w-24 h-24 bg-coffee-brown/30 backdrop-blur-md rounded-full border border-white/40 shadow-xl animate-float"
               style={{ animationDelay: '1s' }}
-            >
-              {/* <div className="text-center">
-                <div className="text-2xl font-bold text-rose-gold">85%</div>
-                <div className="text-sm text-charcoal/70">More Bookings</div>
-              </div> */}
-            </div>
+            ></div>
           </div>
         </div>
       </div>
