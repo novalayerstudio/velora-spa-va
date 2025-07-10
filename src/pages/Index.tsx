@@ -8,6 +8,7 @@ import PlansSection from '@/components/PlansSection';
 import BookCallSection from '@/components/BookCallSection';
 import Footer from '@/components/Footer';
 import ChatBot from '@/components/ChatBot';
+import FAQ from '@/components/FAQ';
 
 const Index = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -26,6 +27,7 @@ const Index = () => {
       <HeroSection />
       <HowItWorksSection />
       <PlansSection />
+      <FAQ />
       <BookCallSection />
       <Footer />
       <ChatBot />

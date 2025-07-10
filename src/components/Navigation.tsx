@@ -55,6 +55,12 @@ const Navigation = () => {
               Plans
             </button>
             <button 
+              onClick={() => scrollToSection('faq')}
+              className="text-charcoal hover:text-rose-gold transition-colors duration-200"
+            >
+              FAQ
+            </button>
+            <button 
               onClick={() => scrollToSection('book-call')}
               className="text-charcoal hover:text-rose-gold transition-colors duration-200"
             >

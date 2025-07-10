@@ -2,11 +2,13 @@
 import { ArrowRight, Calendar, Clock, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const BookCallSection = () => {
-  const handleBookCall = () => {
+export const handleBookCall = () => {
     // Replace with your actual Calendly or booking URL
     window.open('https://calendly.com/your-booking-link', '_blank');
   };
+
+const BookCallSection = () => {
+ 
 
   const benefits = [
     {
@@ -36,11 +38,10 @@ const BookCallSection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 animate-fade-in-up">
             <h2 className="font-playfair text-4xl lg:text-5xl font-bold text-charcoal mb-6">
-              Ready to Stay Booked Out —{' '}
-              <span className="text-rose-gold">Without the Burnout?</span>
+              Ready to fill your calendar?
             </h2>
             <p className="text-xl text-charcoal/70 font-inter mb-8 max-w-3xl mx-auto">
-              Book your free strategy call and get matched with the perfect VA in under 48 hours. No pressure, no commitment—just a clear path to growing your med spa.
+              Book a quick demo and we’ll match you with a VA who gets it.
             </p>
           </div>
 
@@ -82,16 +83,16 @@ const BookCallSection = () => {
               <h3 className="font-playfair text-2xl lg:text-3xl font-bold text-charcoal mb-4 text-center">
                 Start Your Free Demo Today
               </h3>
-              <p className="text-charcoal/70 font-inter mb-8 text-center">
+              {/* <p className="text-charcoal/70 font-inter mb-8 text-center">
                 Join 200+ med spas already using Velora VAs to stay booked solid. See exactly how our VAs will grow your business in our personalized demo.
-              </p>
+              </p> */}
               
               <div className="flex flex-col gap-4 items-center mb-8">
                 <Button 
                   onClick={handleBookCall}
                   className="bg-rose-gold hover:bg-rose-gold/90 text-white px-10 py-4 text-lg rounded-full transition-all duration-200 hover:scale-105 hover:shadow-lg group w-full"
                 >
-                  Book My Free Demo
+                  Book Your Demo Now
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
                 </Button>
                 {/* <span className="text-sm text-charcoal/60 font-inter">

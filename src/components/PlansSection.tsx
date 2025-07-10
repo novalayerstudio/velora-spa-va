@@ -1,7 +1,7 @@
-
-import { Check, Crown, Sparkles, Star } from 'lucide-react';
+import { Check, Crown, Sparkles, Star, List, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { handleBookCall } from './BookCallSection';
 
 const PlansSection = () => {
   const scrollToSection = (sectionId: string) => {
@@ -13,32 +13,29 @@ const PlansSection = () => {
 
   const plans = [
     {
-      name: "Starter Setter",
+      name: "Glow Getter VA",
       icon: Sparkles,
       description: "Daily appointment-setting and DM outreach from trained VAs",
-      fullTimePrice: 1000,
-      partTimePrice: 550,
+      fullTimePrice: 650,
+      partTimePrice: 350,
       features: [
-        "DM outreach on IG/TikTok",
-        "Lead follow-up via DM/email",
-        "Appointment scheduling",
-        "Weekly lead report"
+        "You get the VA, we do the hiring. You train them.",
+        "We set up Calendly or Sheets."
       ],
       popular: false,
       gradient: "from-blush-pink to-white"
     },
     {
-      name: "Engagement Pro",
+      name: "Client Magnet VA",
       icon: Star,
       description: "Advanced lead handling + social engagement tasks",
       fullTimePrice: 1300,
       partTimePrice: 700,
       features: [
-        "Everything in Starter ✅",
-        "Story engagement + comment replies",
-        "Social post scheduling",
-        "Follow-up with no-shows/past leads",
-        "Review management"
+        "Everything in Starter",
+        "We train the VA with proven DM scripts.",
+        "We set up booking flows + CRM basics.",
+        "Weekly check-ins."
       ],
       popular: true,
       gradient: "from-rose-gold/20 to-blush-pink"
@@ -50,11 +47,10 @@ const PlansSection = () => {
       fullTimePrice: 1500,
       partTimePrice: 800,
       features: [
-        "Everything in Pro ✅",
-        "Custom DM scripts + follow-up funnels",
-        "CRM segmentation",
-        "Google/Yelp review management",
-        "Content reposting"
+        "Everything in Pro",
+        "Full strategy: targeting + reactivation flows.",
+        "Daily reporting in Sheets/Notion.",
+        "Direct Slack access + monthly strategy call.",
       ],
       popular: false,
       gradient: "from-rose-gold/30 to-rose-gold/10"
@@ -63,19 +59,39 @@ const PlansSection = () => {
 
   const addOns = [
     {
-      name: "Local Lead Scraping",
+      name: "Local Lead List",
+      icon: List,
       price: 100,
-      description: "We'll build you a custom list of local leads to DM"
+      description: "Curated list of 100+ local potential clients."
     },
     {
-      name: "Email/SMS Follow-Up Funnel",
-      price: "250+",
-      description: "A 5-message rebooking flow that converts ghosted leads"
+      name: "DM Script Pack",
+      icon: MessageCircle,
+      price: "250",
+      description: "Pre-written follow-up messages that convert."
     },
     {
       name: "Paid Ad Starter Kit",
-      price: "500+",
-      description: "Basic FB/IG ad campaign setup to drive even more traffic to your DM funnel"
+      icon: Crown,
+      price: "500",
+      description: "We build your first IG/FB ads to feed more DMs."
+    }
+  ];
+
+  const testimonials = [
+    {
+      quote: "I was overwhelmed—my VA booked 12 facials in 10 days without me touching ads.",
+      handle: "@beautywithsoph",
+      initial: "S",
+      rating: 5,
+      image: "/velora-spa-va/images/soph-logo.png"
+    },
+    {
+      quote: "No more no-shows. My calendar is 3 weeks full, and I'm relaxed.",
+      handle: "@theglowmethod",
+      initial: "G",
+      rating: 5,
+      image: "/velora-spa-va/images/glow-logo.png"
     }
   ];
 
@@ -102,76 +118,87 @@ const PlansSection = () => {
         {/* Main Plans */}
         <div className="grid md:grid-cols-3 gap-8 mb-16">
           {plans.map((plan, index) => (
-            <Card key={index} className={`relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl animate-fade-in-up animate-delay-${(index + 1) * 100} ${
-              plan.popular ? 'border-2 border-rose-gold' : 'border border-blush-pink/50'
-            }`}>
-              {plan.popular && (
-                <div className="absolute top-0 left-0 right-0 bg-rose-gold text-white text-center py-2 text-sm font-medium">
-                  Most Popular
-                </div>
-              )}
-              
-              <CardHeader className={`bg-gradient-to-br ${plan.gradient} ${plan.popular ? 'pt-12' : 'pt-8'}`}>
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="bg-white rounded-full p-3 shadow-lg">
-                    <plan.icon className="w-6 h-6 text-rose-gold" />
+            <Card
+                key={index}
+                className={`relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl animate-fade-in-up animate-delay-${(index + 1) * 100} flex flex-col h-full ${
+                  plan.popular ? 'border-2 border-rose-gold' : 'border border-blush-pink/50'
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute top-0 left-0 right-0 bg-rose-gold text-white text-center py-2 text-sm font-medium">
+                    Most Popular
                   </div>
-                  <h3 className="font-playfair text-2xl font-bold text-charcoal">
-                    {plan.name}
-                  </h3>
-                </div>
-                <p className="text-charcoal/70 font-inter mb-6">
-                  {plan.description}
-                </p>
-                <div className="space-y-2">
-                  <div className="flex items-baseline space-x-2">
-                    <span className="text-3xl font-bold text-charcoal">${plan.fullTimePrice}</span>
-                    <span className="text-charcoal/70">/month (FT)</span>
+                )}
+
+                <CardHeader className={`bg-gradient-to-br ${plan.gradient} ${plan.popular ? 'pt-12' : 'pt-8'}`}>
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className="bg-white rounded-full p-3 shadow-lg">
+                      <plan.icon className="w-6 h-6 text-rose-gold" />
+                    </div>
+                    <h3 className="font-playfair text-2xl font-bold text-charcoal">
+                      {plan.name}
+                    </h3>
                   </div>
-                  <div className="flex items-baseline space-x-2">
-                    <span className="text-2xl font-semibold text-charcoal">${plan.partTimePrice}</span>
-                    <span className="text-charcoal/70">/month (PT)</span>
+
+                  <p className="text-charcoal/70 font-inter mb-6">
+                    {plan.description}
+                  </p>
+
+                  <div className="space-y-2">
+                    <div className="flex items-baseline space-x-2">
+                      <span className="text-3xl font-bold text-charcoal">${plan.fullTimePrice}</span>
+                      <span className="text-charcoal/70">/month (FT)</span>
+                    </div>
+                    <div className="flex items-baseline space-x-2">
+                      <span className="text-2xl font-semibold text-charcoal">${plan.partTimePrice}</span>
+                      <span className="text-charcoal/70">/month (PT)</span>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
-              
-              <CardContent className="p-8 bg-white">
-                <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start space-x-3">
-                      <Check className="w-5 h-5 text-rose-gold mt-0.5 flex-shrink-0" />
-                      <span className="text-charcoal font-inter">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button 
-                  onClick={() => scrollToSection('book-call')}
-                  className={`w-full py-3 rounded-full transition-all duration-200 hover:scale-105 ${
-                    plan.popular 
-                      ? 'bg-rose-gold hover:bg-rose-gold/90 text-white' 
-                      : 'bg-white border-2 border-rose-gold text-rose-gold hover:bg-rose-gold hover:text-white'
-                  }`}
-                >
-                  Get Started
-                </Button>
-              </CardContent>
-            </Card>
+                </CardHeader>
+
+                <CardContent className="p-8 bg-white flex-1 flex flex-col">
+                  <ul className="space-y-4 mb-8 flex-1">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start space-x-3">
+                        <Check className="w-5 h-5 text-rose-gold mt-0.5 flex-shrink-0" />
+                        <span className="text-charcoal font-inter">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Button
+                    onClick={() => handleBookCall()}
+                    className={`w-full py-3 rounded-full transition-all duration-200 hover:scale-105 mt-auto ${
+                      plan.popular
+                        ? 'bg-rose-gold hover:bg-rose-gold/90 text-white'
+                        : 'bg-white border-2 border-rose-gold text-rose-gold hover:bg-rose-gold hover:text-white'
+                    }`}
+                  >
+                    Book a Demo
+                  </Button>
+                </CardContent>
+              </Card>
           ))}
         </div>
 
         {/* Add-ons Section */}
         <div className="animate-fade-in-up animate-delay-400">
           <h3 className="font-playfair text-3xl font-bold text-charcoal text-center mb-8">
-            Optional Add-Ons
+            Want more? Add these
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
             {addOns.map((addon, index) => (
               <Card key={index} className="border border-blush-pink/50 hover:border-rose-gold/30 transition-all duration-300 hover:scale-105">
                 <CardContent className="p-6 bg-white">
                   <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center">
+                    <div className="bg-white rounded-full p-3">
+                      <addon.icon className="w-4 h-4 text-rose-gold" />
+                    </div>
                     <h4 className="font-playfair text-xl font-semibold text-charcoal">
                       {addon.name}
                     </h4>
+                    </div>
                     <span className="text-2xl font-bold text-rose-gold">
                       ${addon.price}
                     </span>
@@ -184,6 +211,47 @@ const PlansSection = () => {
             ))}
           </div>
         </div>
+
+        {/* Social Proof Section */}
+        <div className="animate-fade-in-up animate-delay-500 mt-16">
+          <div className="text-center mb-12">
+            <h3 className="font-playfair text-3xl lg:text-4xl font-light text-charcoal/80 mb-4">
+              Words from spa owners like you
+            </h3>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="border border-blush-pink/50 hover:border-rose-gold/30 transition-all duration-300 hover:scale-105 bg-white/80 backdrop-blur-sm">
+                <CardContent className="p-8">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden border-2 border-rose-gold/20">
+                      <img 
+                        src={testimonial.image} 
+                        alt={`${testimonial.handle} profile`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          // Fallback to initial if image fails to load
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.parentElement.innerHTML = `<div class="w-full h-full bg-gradient-to-br from-rose-gold to-blush-pink rounded-full flex items-center justify-center"><span class="text-white font-bold text-lg">${testimonial.initial}</span></div>`;
+                        }}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <blockquote className="text-charcoal font-inter text-lg italic mb-4">
+                        "{testimonial.quote}"
+                      </blockquote>
+                      <div className="flex items-center">
+                        <span className="text-rose-gold font-medium">{testimonial.handle}</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );

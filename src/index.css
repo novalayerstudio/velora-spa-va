@@ -151,7 +151,7 @@ All colors MUST be HSL.
 
 @layer utilities {
   .animate-blink-caret {
-    animation: blink 1s step-end infinite;
+    animation: blink 2s step-end infinite;
   }
 } */
 
