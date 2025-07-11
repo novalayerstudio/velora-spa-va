@@ -62,8 +62,8 @@ const PlansSection = () => {
         'Includes everything in Client Magnet',
         'Targeting: VA identifies and engages high-fit leads based on your ideal client profile',
         'Reactivation: VA reaches out to cold leads and past clients using strategic outreach',
-        'Daily reporting via Sheets or Notion',
-        'Priority Microsoft Teams access and monthly strategy call',
+        'Daily reporting via Sheets',
+        'Monthly strategy calls',
         'Built for spa owners ready to scale and delegate with confidence',
       ],
       popular: false,
@@ -110,14 +110,14 @@ const PlansSection = () => {
   const testimonials = [
     {
       quote:
-        'I was overwhelmed, my VA booked 12 facials in 10 days without me touching ads.',
+        'Working with them at Velora was great! They helped boost my online presence, and the VA they set me up with has been amazing, super reliable and organized. Communication was easy, and they were always open to feedback. Highly recommend!',
       handle: '@beautywithsoph',
       initial: 'S',
       rating: 5,
       image: '/velora-spa-va/images/soph-logo.png',
     },
     {
-      quote: 'No more no-shows. My calendar is 3 weeks full, and I\'m relaxed.',
+      quote: "Velora really impressed me with how smoothly they handled everything from the start. Kali and Noah took the time to understand my goals and came back with a strategy that actually made sense for my business. The branding updates were sharp, the content was on point, and their team had an eye for details we would've missed. It felt like working with a creative agency, not just a VA service. Super professional, super sharp.",
       handle: '@theglowmethod',
       initial: 'G',
       rating: 5,
